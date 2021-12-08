@@ -9,23 +9,36 @@ const parser = (filepath1, filepath2) => {
  //console.log(obj1);
  //const keys = _.sortedUniq(_.union(Object.keys(obj1), Object.keys(obj2)));
  const keys = _.sortBy(_.union(Object.keys(obj1), Object.keys(obj2)));
- let result = `{\n`;
- for (const key of keys) {
-   if (obj1[key] !== obj2[key] && _.has(obj1, key) && _.has(obj2, key)) {
-     result = `${result}  - ${key}: ${obj1[key]}\n  + ${key}: ${obj2[key]}\n`
-   } else if (obj1[key] === obj2[key] && _.has(obj1, key) && _.has(obj2, key)) {
-     result = `${result}    ${key}: ${obj1[key]}\n`
-   } else if (_.has(obj1, key) && !_.has(obj2, key)) {
-     result = `${result}  - ${key}: ${obj1[key]}\n`
-   } else if (!_.has(obj1, key) && _.has(obj2, key)) {
-     result = `${result}  + ${key}: ${obj2[key]}\n`
-   }
- }
- result = `${result}}`;
+ const func = (acc, key) => {
+      if (obj1[key] !== obj2[key] && _.has(obj1, key) && _.has(obj2, key)) {
+        return `${acc}  - ${key}: ${obj1[key]}\n  + ${key}: ${obj2[key]}\n`;
+      } else if (obj1[key] === obj2[key] && _.has(obj1, key) && _.has(obj2, key)) {
+        return `${acc}    ${key}: ${obj1[key]}\n`;
+      } else if (_.has(obj1, key) && !_.has(obj2, key)) {
+        return `${acc}  - ${key}: ${obj1[key]}\n`;
+      } else if (!_.has(obj1, key) && _.has(obj2, key)) {
+        return `${acc}  + ${key}: ${obj2[key]}\n`;
+      }
+   };
+  const result = keys.reduce(func, `{\n`);
+ //let result = `{\n`;
+ //for (const key of keys) {
+ //  if (obj1[key] !== obj2[key] && _.has(obj1, key) && _.has(obj2, key)) {
+ //    result = `${result}  - ${key}: ${obj1[key]}\n  + ${key}: ${obj2[key]}\n`
+ //  } else if (obj1[key] === obj2[key] && _.has(obj1, key) && _.has(obj2, key)) {
+ //    result = `${result}    ${key}: ${obj1[key]}\n`
+ //  } else if (_.has(obj1, key) && !_.has(obj2, key)) {
+ //    result = `${result}  - ${key}: ${obj1[key]}\n`
+ //  } else if (!_.has(obj1, key) && _.has(obj2, key)) {
+ //    result = `${result}  + ${key}: ${obj2[key]}\n`
+ //  }
+ //}
+ //result = `${result}}`;
  //console.log(keys)
  //console.log(_.sortedUniq(_.concat(Object.keys(obj1), Object.keys(obj2))));
  //console.log(_.sortBy(_.union(Object.keys(obj1), Object.keys(obj2))));
- console.log(result);
+ const newResult = `${result}}`;
+ console.log(newResult);
 };
 
 export default parser;
