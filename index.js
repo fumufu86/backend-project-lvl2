@@ -1,3 +1,3 @@
-import parser from './src/parser';
+import parser from './src/parser.js';
 
 export default parser;
