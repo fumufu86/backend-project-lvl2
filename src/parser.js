@@ -25,6 +25,7 @@ const parser = (filepath1, filepath2) => {
   const result = keys.reduce(func, '{\n');
   const newResult = `${result}}`;
   console.log(newResult);
+  return newResult;
 };
 
 export default parser;
