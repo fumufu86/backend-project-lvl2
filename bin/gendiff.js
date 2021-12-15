@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import program from 'commander';
-import parser from '../index.js';
+import parser from '../index';
 
 program
   .version('0.0.1')
