@@ -1,8 +1,8 @@
-import gendiff from '../src/parser.js';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 import { expect, test } from '@jest/globals';
+import gendiff from '../src/parser.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

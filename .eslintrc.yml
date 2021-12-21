@@ -6,6 +6,8 @@ extends:
 plugins:
   - prettier
 parserOptions:
-  ecmaVersion: 13
+  ecmaVersion: 2020
   sourceType: module
-rules: {}
+rules:
+  import/extensions: 0
+  no-underscore-dangle: [2, { "allow": ["__filename", "__dirname"] }] # разрешает подчёркивание в именах только для двух констант
