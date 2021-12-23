@@ -9,12 +9,13 @@ const parseFile = (filepath) => {
   switch (format) {
     case '.json':
       return JSON.parse(readFile(filepath));
-    case ('.yml' ||'.yaml'):
+    case ('.yml' || '.yaml'):
       return yaml.load(readFile(filepath));
     default:
       throw new Error(`Формат не поддерживается: ${format}`);
   }
-}
+};
+
 const parser = (filepath1, filepath2) => {
   const obj1 = parseFile(filepath1);
   const obj2 = parseFile(filepath2);
