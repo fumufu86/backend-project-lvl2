@@ -34,5 +34,5 @@ const stylish = (data) => {
     }
   });
   return `{\n${iter(data, 1).join('')}}`;
-}
+};
 export default stylish;
