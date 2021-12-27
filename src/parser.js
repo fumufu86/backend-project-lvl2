@@ -1,45 +1,21 @@
-import _ from 'lodash';
-import yaml from 'js-yaml';
 import fs from 'fs';
+import path from 'path';
+import parse from './parsers.js';
+import findDiffs from './finddiffs.js';
+import format from './formatters/formatter.js';
 
 const readFile = (filepath) => fs.readFileSync(filepath, 'utf8');
-const parseFile = (filepath) => {
-  const lastDot = filepath.lastIndexOf('.');
-  const format = filepath.slice(lastDot);
-  switch (format) {
-    case '.json':
-      return JSON.parse(readFile(filepath));
-    case ('.yml' || '.yaml'):
-      return yaml.load(readFile(filepath));
-    default:
-      throw new Error(`Формат не поддерживается: ${format}`);
-  }
-};
 
-const parser = (filepath1, filepath2) => {
-  const obj1 = parseFile(filepath1);
-  const obj2 = parseFile(filepath2);
-  const keys = _.sortBy(_.union(Object.keys(obj1), Object.keys(obj2)));
-  const func = (acc, key) => {
-    if (obj1[key] !== obj2[key] && _.has(obj1, key) && _.has(obj2, key)) {
-      return `${acc}  - ${key}: ${obj1[key]}\n  + ${key}: ${obj2[key]}\n`;
-    } if (
-      obj1[key] === obj2[key]
-      && _.has(obj1, key)
-      && _.has(obj2, key)
-    ) {
-      return `${acc}    ${key}: ${obj1[key]}\n`;
-    } if (_.has(obj1, key) && !_.has(obj2, key)) {
-      return `${acc}  - ${key}: ${obj1[key]}\n`;
-    }
-    // if (!_.has(obj1, key) && _.has(obj2, key)) {
-    return `${acc}  + ${key}: ${obj2[key]}\n`;
-    // }
-  };
-  const result = keys.reduce(func, '{\n');
-  const newResult = `${result}}`;
-  console.log(newResult);
-  return newResult;
+const parser = (filepath1, filepath2, formatName = 'stylish') => {
+  const extname1 = path.extname(filepath1).slice(1);
+  const extname2 = path.extname(filepath2).slice(1);
+  const data1 = readFile(filepath1);
+  const data2 = readFile(filepath2);
+  const obj1 = parse(extname1, data1);
+  const obj2 = parse(extname2, data2);
+  const diffs = findDiffs(obj1, obj2);
+  const result = format(diffs, formatName);
+  return result;
 };
 
 export default parser;
