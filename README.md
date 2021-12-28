@@ -11,3 +11,6 @@ gendiff example
 yaml and json comparison
 [![asciicast](https://asciinema.org/a/pNRAeMh9ZHM2hOfWZnicZVSyN.svg)](https://asciinema.org/a/pNRAeMh9ZHM2hOfWZnicZVSyN)
 [![asciicast](https://asciinema.org/a/WOGDPlY4ppKLPBSc5BCitfu5r.svg)](https://asciinema.org/a/WOGDPlY4ppKLPBSc5BCitfu5r)
+
+yaml and json comparison plain format
+[![asciicast](https://asciinema.org/a/FgzargnOWPriKUD37gqRMNnYv.svg)](https://asciinema.org/a/FgzargnOWPriKUD37gqRMNnYv)
