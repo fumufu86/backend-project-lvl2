@@ -25,3 +25,19 @@ test('test parser.js for YAML', () => {
   const result = gendiff(firstFile, secondFile);
   expect(result).toEqual(expectedResult);
 });
+
+test('test parser.js for JSON, plain format', () => {
+  const firstFile = getFixturePath('file1.json');
+  const secondFile = getFixturePath('file2.json');
+  const expectedResult = readFile('plain.txt');
+  const result = gendiff(firstFile, secondFile, 'plain');
+  expect(result).toEqual(expectedResult);
+});
+
+test('test parser.js for YAML, plain format', () => {
+  const firstFile = getFixturePath('file1.yml');
+  const secondFile = getFixturePath('file2.yml');
+  const expectedResult = readFile('plain.txt');
+  const result = gendiff(firstFile, secondFile, 'plain');
+  expect(result).toEqual(expectedResult);
+});

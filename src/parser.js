@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import parse from './parsers.js';
 import findDiffs from './finddiffs.js';
-import format from './formatters/formatter.js';
+import format from './formatters/index.js';
 
 const readFile = (filepath) => fs.readFileSync(filepath, 'utf8');
 
