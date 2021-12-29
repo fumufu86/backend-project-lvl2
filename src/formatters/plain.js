@@ -1,6 +1,7 @@
 const stringify = (data) => {
   if (typeof data === 'boolean') return `${data}`;
-  if (typeof data !== 'object') return `'${data}'`;
+  if (typeof data === 'string') return `'${data}'`;
+  if (typeof data !== 'object') return `${data}`;
   if (data === null) { return null; }
   return '[complex value]';
 };
