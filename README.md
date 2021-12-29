@@ -14,3 +14,6 @@ yaml and json comparison
 
 yaml and json comparison plain format
 [![asciicast](https://asciinema.org/a/FgzargnOWPriKUD37gqRMNnYv.svg)](https://asciinema.org/a/FgzargnOWPriKUD37gqRMNnYv)
+
+yaml and json comparison json format
+[![asciicast](https://asciinema.org/a/8acSvhErz1HJwA4ToCASE8KBx.svg)](https://asciinema.org/a/8acSvhErz1HJwA4ToCASE8KBx)
