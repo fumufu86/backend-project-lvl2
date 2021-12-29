@@ -10,50 +10,19 @@ const __dirname = dirname(__filename);
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 
-test('test parser.js for JSON', () => {
-  const firstFile = getFixturePath('file1.json');
-  const secondFile = getFixturePath('file2.json');
-  const expectedResult = readFile('result.txt');
-  const result = gendiff(firstFile, secondFile);
-  expect(result).toEqual(expectedResult);
-});
+const cases = [
+  ['file1.json', 'file2.json', 'result.txt', 'stylish'],
+  ['file1.yml', 'file2.yml', 'result.txt', 'stylish'],
+  ['file1.json', 'file2.json', 'plain.txt', 'plain'],
+  ['file1.yml', 'file2.yml', 'plain.txt', 'plain'],
+  ['file1.json', 'file2.json', 'json.txt', 'json'],
+  ['file1.yml', 'file2.yml', 'json.txt', 'json'],
+];
 
-test('test parser.js for YAML', () => {
-  const firstFile = getFixturePath('file1.yml');
-  const secondFile = getFixturePath('file2.yml');
-  const expectedResult = readFile('result.txt');
-  const result = gendiff(firstFile, secondFile);
-  expect(result).toEqual(expectedResult);
-});
-
-test('test parser.js for JSON, plain format', () => {
-  const firstFile = getFixturePath('file1.json');
-  const secondFile = getFixturePath('file2.json');
-  const expectedResult = readFile('plain.txt');
-  const result = gendiff(firstFile, secondFile, 'plain');
-  expect(result).toEqual(expectedResult);
-});
-
-test('test parser.js for YAML, plain format', () => {
-  const firstFile = getFixturePath('file1.yml');
-  const secondFile = getFixturePath('file2.yml');
-  const expectedResult = readFile('plain.txt');
-  const result = gendiff(firstFile, secondFile, 'plain');
-  expect(result).toEqual(expectedResult);
-});
-
-test('test parser.js for JSON, json format', () => {
-  const firstFile = getFixturePath('file1.json');
-  const secondFile = getFixturePath('file2.json');
-  const expectedResult = readFile('json.txt');
-  const result = gendiff(firstFile, secondFile, 'json');
-  expect(result).toEqual(expectedResult);
-});
-
-test('test parser.js for YAML, json format', () => {
-  const firstFile = getFixturePath('file1.yml');
-  const secondFile = getFixturePath('file2.yml');
-  const expectedResult = readFile('json.txt');
-  const result = gendiff(firstFile, secondFile, 'json');
+test.each(cases)('Compare %s and %s to expect %s in "%s" style', (firstArg, secondArg, expected, format) => {
+  const firstFile = getFixturePath(firstArg);
+  const secondFile = getFixturePath(secondArg);
+  const expectedResult = readFile(expected);
+  const result = gendiff(firstFile, secondFile, format);
   expect(result).toEqual(expectedResult);
 });
